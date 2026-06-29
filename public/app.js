@@ -248,12 +248,10 @@ const TV_CHECK = [
     title: 'M/W 유로텍',
     contacts: ['010-2203-2601 (유로텍 박승원 부장)'],
     fields: [
-      { k: 'mw_txa', label: 'TX-A' },
-      { k: 'mw_txb', label: 'TX-B' },
-      { k: 'mw_txpwr', label: 'TX POWER(dBm)', type: 'value' },
-      { k: 'mw_rxa', label: 'RX-A' },
-      { k: 'mw_rxb', label: 'RX-B' },
-      { k: 'mw_rxpwr', label: 'RX POWER(dBm)', type: 'value' },
+      { k: 'mw_txa_pwr', label: 'TX-A POWER(dBm)', type: 'value' },
+      { k: 'mw_txb_pwr', label: 'TX-B POWER(dBm)', type: 'value' },
+      { k: 'mw_rxa_pwr', label: 'RX-A POWER(dBm)', type: 'value' },
+      { k: 'mw_rxb_pwr', label: 'RX-B POWER(dBm)', type: 'value' },
       { k: 'mw_rack', label: 'RACK실 온도(°C)', type: 'value' }
     ]
   }
