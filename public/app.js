@@ -257,7 +257,11 @@ const TV_CHECK = [
   }
 ];
 
-function pillRow(field, prefix, groupOptions, disabled) {
+function prevValSpan(section, label) {
+  return `<span class="prev-val" data-section="${escapeHtml(section)}" data-label="${escapeHtml(label)}"></span>`;
+}
+
+function pillRow(field, prefix, groupOptions, disabled, section) {
   const options = field.options || groupOptions || ['정상', 'Fault'];
   const isChoice = field.type === 'choice';
   const pills = options
@@ -280,14 +284,16 @@ function pillRow(field, prefix, groupOptions, disabled) {
     <div class="check-row">
       <span class="check-label">${escapeHtml(field.label)}</span>
       <div class="status-pills">${pills}</div>
+      ${prevValSpan(section, field.label)}
     </div>`;
 }
 
-function valueRow(field, prefix, disabled) {
+function valueRow(field, prefix, disabled, section) {
   return `
     <div class="check-row">
       <span class="check-label">${escapeHtml(field.label)}</span>
       <input type="text" class="value-input" name="${prefix}${field.k}" placeholder="측정값" ${disabled ? 'disabled' : ''} />
+      ${prevValSpan(section, field.label)}
     </div>`;
 }
 
@@ -297,8 +303,8 @@ function renderCheckGroups(groups, prefix) {
       const rows = group.fields
         .map((field) =>
           field.type === 'value'
-            ? valueRow(field, prefix, group.disabled)
-            : pillRow(field, prefix, group.options, group.disabled)
+            ? valueRow(field, prefix, group.disabled, group.title)
+            : pillRow(field, prefix, group.options, group.disabled, group.title)
         )
         .join('');
       const contacts =
@@ -462,6 +468,7 @@ function setSelection(date, channel, worker) {
   logPanelSubtitle.textContent = `${selectedWorker} 근무자의 일지를 확인합니다.`;
   listTitle.textContent = `${selectedDate} · ${selectedChannel} · ${selectedWorker} 최근 일지`;
   updateFormMode();
+  applyPrevDay();
 }
 
 function escapeHtml(value) {
@@ -571,12 +578,43 @@ function renderCalendar() {
   }
 }
 
+function findPrevLog(date, channel) {
+  const prior = logsCache.filter((log) => log.channel === channel && log.date < date);
+  if (!prior.length) {
+    return null;
+  }
+  return prior.reduce((latest, log) => (latest.date >= log.date ? latest : log));
+}
+
+function applyPrevDay() {
+  const spans = form.querySelectorAll('.prev-val');
+  if (!spans.length) {
+    return;
+  }
+  const prev = selectedChannel && selectedDate ? findPrevLog(selectedDate, selectedChannel) : null;
+  const sections = prev ? parseLogContent(prev.content) : null;
+  const dateLabel = prev ? prev.date.slice(5) : '';
+  spans.forEach((span) => {
+    const section = sections && sections[span.dataset.section];
+    const value = section ? section.fields[span.dataset.label] : undefined;
+    if (value === undefined) {
+      span.textContent = '';
+      span.classList.remove('prev-warn');
+      return;
+    }
+    const warn = value === 'Fault' || value === '비정상';
+    span.textContent = `전일(${dateLabel}): ${value}${warn ? ' ⚠' : ''}`;
+    span.classList.toggle('prev-warn', warn);
+  });
+}
+
 async function loadAllLogs() {
   try {
     const response = await fetch('/api/logs');
     logsCache = await response.json();
     renderCalendar();
     await loadLogs();
+    applyPrevDay();
   } catch (error) {
     list.innerHTML = '<div class="empty">일지를 불러오지 못했습니다.</div>';
   }
