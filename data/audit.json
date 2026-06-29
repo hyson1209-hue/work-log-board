@@ -1,0 +1,79 @@
+[
+  {
+    "id": "mqywq8hi297",
+    "at": "2026-06-29T07:39:32.598Z",
+    "action": "update",
+    "actor": "이영희",
+    "logId": "mqyq3jml",
+    "date": "2026-06-29",
+    "channel": "TV",
+    "worker": "이영희",
+    "title": "TV 기술일지·장비점검일지"
+  },
+  {
+    "id": "mqyvcf9f605",
+    "at": "2026-06-29T07:00:48.579Z",
+    "action": "approve",
+    "actor": "관리자",
+    "logId": "mqytjxve",
+    "date": "2026-06-29",
+    "channel": "RADIO",
+    "worker": "김철수",
+    "title": "라디오주조·IMC렉실 점검일지"
+  },
+  {
+    "id": "mqyvbbt0186",
+    "at": "2026-06-29T06:59:57.444Z",
+    "action": "delete",
+    "actor": "관리자",
+    "logId": "mqyr8mih",
+    "date": "2026-06-30",
+    "channel": "TV",
+    "worker": "홍길동",
+    "title": "sdf"
+  },
+  {
+    "id": "mqyvb2rc271",
+    "at": "2026-06-29T06:59:45.720Z",
+    "action": "delete",
+    "actor": "관리자",
+    "logId": "mqyr8hwd",
+    "date": "2026-06-29",
+    "channel": "TV",
+    "worker": "홍길동",
+    "title": "sdf"
+  },
+  {
+    "id": "mqyvarj6194",
+    "at": "2026-06-29T06:59:31.170Z",
+    "action": "delete",
+    "actor": "관리자",
+    "logId": "mqysaclv",
+    "date": "2026-06-29",
+    "channel": "RADIO",
+    "worker": "홍길동",
+    "title": "라디오주조·IMC렉실 점검일지"
+  },
+  {
+    "id": "mqyvaoyu133",
+    "at": "2026-06-29T06:59:27.846Z",
+    "action": "delete",
+    "actor": "관리자",
+    "logId": "mqytzzl0",
+    "date": "2026-06-29",
+    "channel": "RADIO",
+    "worker": "홍길동",
+    "title": "라디오주조·IMC렉실 점검일지"
+  },
+  {
+    "id": "mqyvak4m685",
+    "at": "2026-06-29T06:59:21.574Z",
+    "action": "delete",
+    "actor": "관리자",
+    "logId": "mqyucdq8",
+    "date": "2026-06-29",
+    "channel": "RADIO",
+    "worker": "홍길동",
+    "title": "라디오주조·IMC렉실 점검일지"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "mqyv11rg",
+    "date": "2026-06-30",
+    "channel": "RADIO",
+    "worker": "이영희",
+    "title": "라디오주조·IMC렉실 점검일지",
+    "content": "[라디오 주조]\n- SFM PIC: 정상\n- SFM STUDIO: 정상\n- MFM PIC: 정상\n- MFM STUDIO: 정상\n- SFM MCFS 1/2: 정상\n- SFM AIR 1/2: 정상\n- MFM MCFS 1/2: 정상\n- MFM AIR 1/2: 정상\n- SMPTE_Server: 정상\n- DB_Group: 정상\n- DB 1: 정상\n- DB 2: 정상\n\n[GPS / 링크]\n- GPS: Lock\n- 청주 링크: Lock\n\n[FM 스케줄]\n- 표준FM · 주: 정상\n- 표준FM · 예비: 정상\n- 표준FM · C/O: 정상\n- 음악FM · 주: 정상\n- 음악FM · 예비: 정상\n- 음악FM · C/O: 정상\n\n[NAS / STL]\n- NAS · 주: 정상\n- NAS · 예비: 정상\n- 표준FM STL: 정상\n- 음악FM STL: 정상\n\n[표준FM 송신기]\n- Tx-A: 정상\n- Tx-B: 정상\n- FWD: -\n- REF: -\n\n[음악FM 송신기]\n- Tx-A: 정상\n- Tx-B: 정상\n- FWD: -\n- REF: -\n\n[IMC 렉실 (TV / 통합)]\n- 통합망: 정상\n- XSAN: 정상\n- NDD 1/2: 정상\n- iMCO 1/2: 정상\n- PSIP: 정상\n- Caption 서버: 정상\n- Video 서버: 정상\n- 유로텍: 정상\n\n[비고]\nsdfsd",
+    "createdAt": "2026-06-29T06:51:57.868Z"
+  },
+  {
+    "id": "mqytjxve",
+    "date": "2026-06-29",
+    "channel": "RADIO",
+    "worker": "김철수",
+    "title": "라디오주조·IMC렉실 점검일지",
+    "content": "[라디오 주조]\n- SFM PIC: 정상\n- SFM STUDIO: 정상\n- MFM PIC: 정상\n- MFM STUDIO: 정상\n- SFM MCFS 1/2: 정상\n- SFM AIR 1/2: 정상\n- MFM MCFS 1/2: 정상\n- MFM AIR 1/2: 정상\n- SMPTE_Server: 정상\n- DB_Group: 정상\n- DB 1: 정상\n- DB 2: 정상\n\n[GPS / 링크]\n- GPS: Lock\n- 청주 링크: Lock\n\n[FM 스케줄]\n- 표준FM · 주: 정상\n- 표준FM · 예비: 정상\n- 표준FM · C/O: 정상\n- 음악FM · 주: 정상\n- 음악FM · 예비: 정상\n- 음악FM · C/O: 정상\n\n[NAS / STL]\n- NAS · 주: 정상\n- NAS · 예비: 정상\n- 표준FM STL: 정상\n- 음악FM STL: 정상\n\n[표준FM 송신기]\n- Tx-A: 정상\n- Tx-B: 정상\n- FWD: -\n- REF: -\n\n[음악FM 송신기]\n- Tx-A: 정상\n- Tx-B: 정상\n- FWD: -\n- REF: -\n\n[IMC 렉실 (TV / 통합)]\n- 통합망: 정상\n- XSAN: 정상\n- NDD 1/2: 정상\n- iMCO 1/2: 정상\n- PSIP: 정상\n- Caption 서버: 정상\n- Video 서버: 정상\n- 유로텍: 정상\n\n[비고]\nsdfsdf",
+    "createdAt": "2026-06-29T06:10:40.058Z",
+    "approved": true,
+    "approvedAt": "2026-06-29T07:00:48.577Z"
+  },
+  {
+    "id": "mqyq3jml",
+    "date": "2026-06-29",
+    "channel": "TV",
+    "worker": "이영희",
+    "title": "TV 기술일지·장비점검일지",
+    "content": "[기술일지]\n- 날씨: -\n- 방송 시간: -\n- TD 일근: -\n- TD 야근: -\n- MD 오전: -\n- MD 오후: -\n- 주조 RACK실 온도(°C): -\n\n[HD-ENC]\n- HD-ENC 1: 정상\n- HD-ENC 2: 정상\n\n[310M C/O]\n- CH-1 (유로텍) 입력: IN A\n\n[송신소 DTV PIC]\n- PIC 소스: 유로텍A\n\n[LG 통합망]\n- 주: 정상\n- 예비: 정상\n\n[IMCO / LODMS]\n- IMCO 주: 정상\n- IMCO 예비: 정상\n- LODMS 주: 정상\n- LODMS 예비: 정상\n\n[DMB (my MBC11)]\n- A-TX 입력: -\n- A-TX 상태: -\n- B-TX 입력: -\n- B-TX 상태: -\n\n[CAPTION 자막방송]\n- 주: 정상\n- 예비: 정상\n\n[Loudness Log (-24LKFS ±2)]\n- 주 음성: 정상\n- 부 음성: 정상\n\n[재난재해 방송]\n- 주: 정상\n- 예비: 정상\n\n[M/W 유로텍]\n- TX-A: 정상\n- TX-B: 정상\n- TX POWER(dBm): -\n- RX-A: 정상\n- RX-B: 정상\n- RX POWER(dBm): -\n- RACK실 온도(°C): -\n\n[비고]\nㅇㅇㅀㅇㄹ",
+    "createdAt": "2026-06-29T04:33:56.253Z",
+    "approved": false,
+    "approvedAt": null,
+    "updatedAt": "2026-06-29T07:39:32.371Z"
+  }
+]

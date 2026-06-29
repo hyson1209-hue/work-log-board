@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBC충북 충주연주소 주조정실 근무 일지</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="panel">
+        <div class="app-header">
+          <h1>MBC충북 충주연주소 주조정실 근무 일지</h1>
+          <button type="button" id="admin-toggle" class="admin-toggle">관리자 로그인</button>
+        </div>
+        <p>날짜와 채널, 근무자를 먼저 선택하면 해당 일지를 바로 작성할 수 있습니다.</p>
+
+        <div class="selection-card">
+          <div class="calendar-shell">
+            <div class="calendar-header">
+              <button type="button" id="prev-month">◀</button>
+              <h2 id="calendar-title">2026년 6월</h2>
+              <button type="button" id="next-month">▶</button>
+            </div>
+            <div class="weekday-row">
+              <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+          </div>
+
+          <div class="selector-box">
+            <label>
+              채널
+              <div class="channel-toggle" role="group" aria-label="채널 선택">
+                <button type="button" class="channel-option" data-channel="TV">TV</button>
+                <button type="button" class="channel-option" data-channel="RADIO">RADIO</button>
+              </div>
+              <input type="hidden" id="channel-input" value="" />
+            </label>
+
+            <label>
+              근무자
+              <select id="worker-select">
+                <option value="" disabled selected>근무자 선택</option>
+              </select>
+            </label>
+
+            <p class="helper-text" id="calendar-hint">채널과 근무자를 먼저 선택하면 달력에서 날짜를 고를 수 있습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="log-panel" class="panel hidden">
+        <div class="log-panel-heading">
+          <div>
+            <h2 id="log-panel-title">일지 작성</h2>
+            <p id="log-panel-subtitle">채널과 근무자를 선택한 뒤 달력에서 날짜를 누르면 일지창이 열립니다.</p>
+          </div>
+        </div>
+
+        <form id="log-form">
+          <input type="hidden" name="date" id="form-date" />
+          <input type="hidden" name="channel" id="form-channel" />
+          <input type="hidden" name="worker" id="form-worker" />
+
+          <div id="form-radio" class="checklist" hidden></div>
+          <div id="form-tv" class="checklist" hidden></div>
+
+          <button type="submit">저장하기</button>
+        </form>
+
+        <div class="log-list-section">
+          <h3 id="list-title">최근 일지</h3>
+          <div id="log-list" class="log-list"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="print-panel" hidden>
+        <h2>일지 출력</h2>
+        <p class="helper-text">매체와 기간을 선택해 한 달치 또는 한 분기치 일지를 인쇄할 수 있습니다.</p>
+        <div class="print-controls">
+          <label>
+            매체
+            <select id="print-channel">
+              <option value="RADIO">RADIO</option>
+              <option value="TV">TV</option>
+            </select>
+          </label>
+          <label>
+            기간
+            <select id="print-period">
+              <option value="month">월간</option>
+              <option value="quarter">분기</option>
+            </select>
+          </label>
+          <label>
+            연도
+            <input type="number" id="print-year" min="2000" max="2100" />
+          </label>
+          <label id="print-month-wrap">
+            월
+            <select id="print-month"></select>
+          </label>
+          <label id="print-quarter-wrap" hidden>
+            분기
+            <select id="print-quarter">
+              <option value="1">1분기 (1~3월)</option>
+              <option value="2">2분기 (4~6월)</option>
+              <option value="3">3분기 (7~9월)</option>
+              <option value="4">4분기 (10~12월)</option>
+            </select>
+          </label>
+          <button type="button" id="print-button">출력 / 인쇄</button>
+        </div>
+      </section>
+
+      <section class="panel" id="audit-panel" hidden>
+        <div class="app-header">
+          <h2>활동 로그</h2>
+          <button type="button" id="audit-refresh" class="admin-toggle">새로고침</button>
+        </div>
+        <p class="helper-text">일지 작성·수정·삭제·관리자 확인 기록입니다.</p>
+        <div id="audit-list" class="audit-list"></div>
+      </section>
+    </main>
+
+    <div id="log-modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <h3 id="modal-title"></h3>
+            <p id="modal-meta" class="log-meta"></p>
+          </div>
+          <button type="button" id="modal-close" class="modal-close" aria-label="닫기">✕</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+        <div class="modal-footer">
+          <label id="approval-control" class="approval-control" hidden>
+            <input type="checkbox" id="approval-checkbox" />
+            <span>관리자 확인</span>
+            <span id="approval-status" class="approval-status"></span>
+          </label>
+          <div class="modal-actions">
+            <button type="button" id="modal-delete" class="modal-delete" hidden>삭제</button>
+            <button type="button" id="modal-edit" class="modal-edit">수정</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

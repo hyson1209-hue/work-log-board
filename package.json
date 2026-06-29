@@ -1,0 +1,10 @@
+{
+  "name": "work-log-board",
+  "version": "1.0.0",
+  "description": "A simple shared daily work log web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
