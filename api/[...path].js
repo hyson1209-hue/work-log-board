@@ -20,8 +20,14 @@ module.exports = async (req, res) => {
       res.end(JSON.stringify({ error: 'Not found' }));
     }
   } catch (error) {
-    res.statusCode = 500;
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    res.end(JSON.stringify({ error: error.message || 'Server error' }));
+    try {
+      if (!res.headersSent) {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      }
+      res.end(JSON.stringify({ error: String((error && error.stack) || error) }));
+    } catch (_) {
+      // response already finished
+    }
   }
 };
