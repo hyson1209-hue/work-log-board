@@ -33,14 +33,47 @@ npm test
 | `DATA_FILE` | `data/logs.json` | 일지 데이터 파일 |
 | `AUDIT_FILE` | `data/audit.json` | 감사 로그 파일 |
 | `ADMIN_PASSWORD` | `admin1234` | 관리자 비밀번호 (운영 시 반드시 변경) |
+| `UPSTASH_REDIS_REST_URL` | — | (Vercel 배포 시) Upstash Redis REST URL |
+| `UPSTASH_REDIS_REST_TOKEN` | — | (Vercel 배포 시) Upstash Redis REST 토큰 |
 
 ```bash
 ADMIN_PASSWORD=원하는비밀번호 npm start
 ```
 
+## 외부 배포 (Vercel + Upstash, 무료)
+
+무료로 외부 접속까지 하려면 **Vercel**(호스팅) + **Upstash Redis**(데이터 저장)를 씁니다. 둘 다 신용카드 없이 무료로 시작할 수 있습니다.
+
+### 1) Upstash Redis 만들기 (데이터 저장소)
+
+1. [upstash.com](https://upstash.com) 가입 → **Create Database** (Redis).
+2. 만든 DB의 **REST API** 섹션에서 다음 두 값을 복사해 둡니다.
+   - `UPSTASH_REDIS_REST_URL`
+   - `UPSTASH_REDIS_REST_TOKEN`
+
+### 2) Vercel에 배포
+
+1. 이 저장소를 GitHub에 푸시합니다.
+2. [vercel.com](https://vercel.com) 가입 → **Add New → Project**에서 이 저장소를 임포트합니다.
+3. **Environment Variables**에 아래 3개를 등록합니다.
+
+   | 이름 | 값 |
+   |------|----|
+   | `UPSTASH_REDIS_REST_URL` | Upstash에서 복사한 URL |
+   | `UPSTASH_REDIS_REST_TOKEN` | Upstash에서 복사한 토큰 |
+   | `ADMIN_PASSWORD` | 원하는 관리자 비밀번호 |
+
+4. **Deploy**를 누르면 `https://<프로젝트>.vercel.app` 주소로 외부에서 접속됩니다.
+
+> **동작 방식:** 정적 화면(`public/`)은 Vercel이 바로 서빙하고, `/api/*` 요청은 서버리스 함수(`api/[...path].js`)가 처리하며 일지·감사로그는 Upstash Redis에 저장됩니다. 재배포·재시작과 무관하게 데이터가 유지됩니다.
+
 ## 구조
 
-- `server.js` — Node 기본 http 서버 (REST API + 정적 파일)
+- `server.js` — 로컬 개발용 Node http 서버 (파일 저장)
+- `api/[...path].js` — Vercel 서버리스 함수 (`/api/*`, Redis 저장)
+- `lib/handlers.js` — 서버·서버리스가 공유하는 라우팅 로직
+- `lib/file-storage.js` / `lib/redis-storage.js` — 저장소 구현 (로컬 파일 / Upstash)
+- `vercel.json` — Vercel 설정 (정적 루트 = `public/`)
 - `public/` — 프런트엔드 (`index.html`, `app.js`, `styles.css`)
 - `test/app.test.js` — API 테스트 (`node --test`)
 - `data/` — 일지·감사 로그 저장
