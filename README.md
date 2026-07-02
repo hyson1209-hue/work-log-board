@@ -35,6 +35,8 @@ npm test
 | `ADMIN_PASSWORD` | `admin1234` | 관리자 비밀번호 (운영 시 반드시 변경) |
 | `UPSTASH_REDIS_REST_URL` | — | (Vercel 배포 시) Upstash Redis REST URL |
 | `UPSTASH_REDIS_REST_TOKEN` | — | (Vercel 배포 시) Upstash Redis REST 토큰 |
+| `TELEGRAM_BOT_TOKEN` | — | (선택) 비고 작성 시 텔레그램 알림용 봇 토큰 |
+| `TELEGRAM_CHAT_ID` | — | (선택) 알림을 받을 텔레그램 채팅 ID |
 
 ```bash
 ADMIN_PASSWORD=원하는비밀번호 npm start

@@ -332,6 +332,11 @@ button {
   font-weight: 600;
 }
 
+.remarks-note {
+  color: #c0392b;
+  font-size: 0.85em;
+}
+
 .checklist .tv-tech {
   grid-column: 1 / -1;
 }

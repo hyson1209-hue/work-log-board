@@ -1,5 +1,6 @@
 const { createApp } = require('../lib/handlers');
 const { createRedisStorage } = require('../lib/redis-storage');
+const { createTelegramNotifier } = require('../lib/telegram');
 
 const storage = createRedisStorage({
   url: process.env.UPSTASH_REDIS_REST_URL,
@@ -8,7 +9,11 @@ const storage = createRedisStorage({
 
 const app = createApp({
   storage,
-  adminPassword: process.env.ADMIN_PASSWORD || 'admin1234'
+  adminPassword: process.env.ADMIN_PASSWORD || 'admin1234',
+  notify: createTelegramNotifier({
+    botToken: process.env.TELEGRAM_BOT_TOKEN,
+    chatId: process.env.TELEGRAM_CHAT_ID
+  })
 });
 
 module.exports = async (req, res) => {

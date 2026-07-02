@@ -325,7 +325,7 @@ function renderRadioForm() {
   formRadio.innerHTML = `
     ${renderCheckGroups(RADIO_FORM, 'r_')}
     <label class="remarks">
-      비고
+      비고 <span class="remarks-note">(기술부장에게 전달)</span>
       <textarea name="r_remarks" rows="4" placeholder="특이사항을 적어주세요."></textarea>
     </label>`;
 }
@@ -354,7 +354,7 @@ function renderTvForm() {
     </fieldset>
     ${renderCheckGroups(TV_CHECK, 't_')}
     <label class="remarks">
-      비고
+      비고 <span class="remarks-note">(기술부장에게 전달)</span>
       <textarea name="t_remarks" rows="3" placeholder="특이사항을 적어주세요."></textarea>
     </label>`;
 }

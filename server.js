@@ -5,6 +5,7 @@ const path = require('path');
 const { createApp } = require('./lib/handlers');
 const { createFileStorage } = require('./lib/file-storage');
 const { createRedisStorage } = require('./lib/redis-storage');
+const { createTelegramNotifier } = require('./lib/telegram');
 
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin1234';
@@ -21,7 +22,11 @@ const storage = process.env.UPSTASH_REDIS_REST_URL
       token: process.env.UPSTASH_REDIS_REST_TOKEN
     })
   : createFileStorage({ dataFile: DATA_FILE, auditFile: AUDIT_FILE });
-const app = createApp({ storage, adminPassword: ADMIN_PASSWORD });
+const notify = createTelegramNotifier({
+  botToken: process.env.TELEGRAM_BOT_TOKEN,
+  chatId: process.env.TELEGRAM_CHAT_ID
+});
+const app = createApp({ storage, adminPassword: ADMIN_PASSWORD, notify });
 
 function serveStatic(res, filePath) {
   const ext = path.extname(filePath).toLowerCase();
