@@ -4,6 +4,7 @@ const path = require('path');
 
 const { createApp } = require('./lib/handlers');
 const { createFileStorage } = require('./lib/file-storage');
+const { createRedisStorage } = require('./lib/redis-storage');
 
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin1234';
@@ -12,7 +13,14 @@ const DATA_DIR = path.join(__dirname, 'data');
 const DATA_FILE = process.env.DATA_FILE || path.join(DATA_DIR, 'logs.json');
 const AUDIT_FILE = process.env.AUDIT_FILE || path.join(DATA_DIR, 'audit.json');
 
-const storage = createFileStorage({ dataFile: DATA_FILE, auditFile: AUDIT_FILE });
+// Vercel 등에서 server.js가 그대로 실행돼도 저장이 되도록, Upstash 환경변수가
+// 있으면 Redis 저장을 사용한다. (서버리스 파일시스템은 읽기전용)
+const storage = process.env.UPSTASH_REDIS_REST_URL
+  ? createRedisStorage({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN
+    })
+  : createFileStorage({ dataFile: DATA_FILE, auditFile: AUDIT_FILE });
 const app = createApp({ storage, adminPassword: ADMIN_PASSWORD });
 
 function serveStatic(res, filePath) {
@@ -39,8 +47,16 @@ function serveStatic(res, filePath) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const handled = await app(req, res);
-  if (handled) {
+  try {
+    const handled = await app(req, res);
+    if (handled) {
+      return;
+    }
+  } catch (error) {
+    if (!res.headersSent) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+    }
+    res.end(JSON.stringify({ error: String((error && error.stack) || error) }));
     return;
   }
 
